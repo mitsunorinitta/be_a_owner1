@@ -29,3 +29,46 @@ Be a Owner
 # 開発環境
 Ruby/Ruby on Rails/MySQL/Github/AWS/Visual Studio Code/Render
 
+
+# テーブル設計
+
+## Usersテーブル
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+
+### Association
+has_many :animals
+
+
+## Animalsテーブル
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| pet_type_id       | integer    | null: false                    |
+| animal_name       | string     | null: false                    |
+| breed             | string     |                                |
+| animal_color      | string     |                                |
+| animal_gender_id  | integer    |                                |
+| birth_day         | date       |                                |
+| user              | references | null: false, foreign_key: true |
+
+### Association
+belongs_to :user
+has_many :health_management_dates
+
+
+## Health_management_datesテーブル
+| Column           | Type    | Options     |
+| ---------------- | ------- | ----------- |
+| record_date      | date    | null: false |
+| body_weight      | integer |             |
+| appetite_id      | integer |             |
+| vigor_id         | integer |             |
+| vomit_id         | integer |             |
+| diarrhea_id      | integer |             |
+| memo             | string  |             |
+
+### Association
+belongs_to :animal
